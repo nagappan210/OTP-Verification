@@ -18,7 +18,7 @@ const JWT_SECRET = process.env.JWT_SECRET;
 
 
 const transporter = nodemailer.createTransport({
-  service: 'gmail', 
+  service: 'gmail',
   auth: {
     user: process.env.EMAIL_USER,
     pass: process.env.EMAIL_PASS,
@@ -31,9 +31,22 @@ const storage = multer.diskStorage({
   filename: (req, file, cb) => {
     const unique = Date.now() + '-' + file.originalname;
     cb(null, unique);
-  }
+  },
 });
 const upload = multer({ storage });
+
+
+const authenticateToken = (req, res, next) => {
+  const authHeader = req.headers['authorization'];
+  const token = authHeader?.split(' ')[1];
+  if (!token) return res.sendStatus(401);
+
+  jwt.verify(token, JWT_SECRET, (err, user) => {
+    if (err) return res.sendStatus(403);
+    req.user = user;
+    next();
+  });
+};
 
 
 app.post('/reg', upload.single('profile'), async (req, res) => {
@@ -48,7 +61,7 @@ app.post('/reg', upload.single('profile'), async (req, res) => {
   const query = `INSERT INTO balaji (name, email, password, phone_no, profile) VALUES (?, ?, ?, ?, ?)`;
   const values = [name, email, hashedPassword, phone_no, profile];
 
-  db.query(query, values, (err, result) => {
+  db.query(query, values, (err) => {
     if (err) {
       console.error("Registration error:", err);
       return res.status(500).json({ message: "Database error" });
@@ -70,7 +83,7 @@ app.post('/login', async (req, res) => {
     const passwordMatch = await bcrypt.compare(password.toString(), user.password);
     if (!passwordMatch) return res.status(401).json({ message: "Invalid credentials" });
 
-    const token = jwt.sign({ id: user.id, email: user.email }, JWT_SECRET, { expiresIn: '2h' });
+    const token = jwt.sign({ id: user.id, email: user.email,profile:user.profile }, JWT_SECRET, { expiresIn: '2h' });
 
     res.status(200).json({
       message: "Login successful",
@@ -143,6 +156,16 @@ app.post("/verify-otp", (req, res) => {
     db.query("UPDATE balaji SET otp = NULL, otp_created_at = NULL WHERE email = ?", [email], () => {
       return res.status(200).json({ message: "OTP verified successfully" });
     });
+  });
+});
+
+
+app.get('/profile', authenticateToken, (req, res) => {
+  const userId = req.user.id;
+  db.query('SELECT id, name, email, profile FROM balaji WHERE id = ?', [userId], (err, result) => {
+    if (err) return res.status(500).json({ message: "Database error" });
+    if (result.length === 0) return res.status(404).json({ message: "User not found" });
+    res.status(200).json(result[0]);
   });
 });
 

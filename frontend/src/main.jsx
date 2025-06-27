@@ -5,7 +5,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import User_reg from './user authentications/user_reg'
 import Login from './user authentications/user_login';
 import Home from './Home';
-import Otp from './otp';
+import Otp from './user authentications/otp';
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>

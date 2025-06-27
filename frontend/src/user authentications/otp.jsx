@@ -22,7 +22,7 @@ const Otp = () => {
 
       if (res.data.message === "OTP verified successfully") {
         localStorage.removeItem("email");
-        setTimeout(() => navigate("/login"), 2000);
+        setTimeout(() => navigate("/"), 2000);
       }
     } catch (err) {
       setMessage(err.response?.data?.message || "Verification failed");
