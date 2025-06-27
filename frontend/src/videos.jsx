@@ -50,7 +50,7 @@ const VideoCarousel = () => {
       <AnimatePresence>
         {selectedVideo && (
           <motion.div
-            className="fixed inset-0 bg-black bg-opacity-70 z-50 flex items-center justify-center px-4"
+            className="fixed inset-0 bg-opacity-70 z-50 flex items-center justify-center px-4"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}

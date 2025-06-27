@@ -90,7 +90,7 @@ app.post('/send-otp', (req, res) => {
   const { email } = req.body;
   if (!email) return res.status(400).json({ message: "Email is required" });
 
-  const otp = Math.floor(100000 + Math.random() * 900000).toString(); // 6-digit OTP
+  const otp = Math.floor(100000 + Math.random() * 900000).toString();
 
   db.query("SELECT * FROM balaji WHERE email = ?", [email], (err, result) => {
     if (err) return res.status(500).json({ message: "Database error" });
