@@ -24,7 +24,7 @@ const Body = () => {
 
   return (
     <div className="py-6 relative">
-      {/* 🔁 Marquee Carousel */}
+
       <Marquee speed={30} pauseOnHover gradient={false} className="overflow-hidden">
         {images.map((src, index) => (
           <img
@@ -37,14 +37,14 @@ const Body = () => {
         ))}
       </Marquee>
 
-      {/* ✨ Modal Popup */}
+ 
       <AnimatePresence>
         {showPopup && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 px-4"
+            className="fixed inset-0  bg-opacity-50 flex items-center justify-center z-50 px-4"
             onClick={closePopup}
           >
             <motion.div
@@ -84,7 +84,7 @@ const Body = () => {
         )}
       </AnimatePresence>
 
-      {/* 🧾 Cards */}
+
       <div className="max-w-6xl mx-auto mt-10 grid grid-cols-1 md:grid-cols-2 gap-6 px-4 pt-10 pb-10">
         <div className="bg-white rounded-xl shadow p-6 flex flex-col sm:flex-row items-center gap-4 hover:shadow-lg transition duration-300">
           <div className="flex-1 text-center sm:text-left">
