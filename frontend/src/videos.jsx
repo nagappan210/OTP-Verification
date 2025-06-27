@@ -47,7 +47,7 @@ const VideoCarousel = () => {
 
   return (
     <div className="px-4 sm:px-10 lg:px-20 my-10 mt-20">
-      {/* 🎥 Video Marquee Section */}
+      
       <h2 className="text-xl sm:text-2xl font-serif mb-8 text-gray-800">
         Generic Medicine Explained
       </h2>
@@ -72,7 +72,7 @@ const VideoCarousel = () => {
         ))}
       </Marquee>
 
-      {/* 📺 Video Popup Modal */}
+   
       <AnimatePresence>
         {selectedVideo && (
           <motion.div
@@ -109,7 +109,7 @@ const VideoCarousel = () => {
         )}
       </AnimatePresence>
 
-      {/* 🛍️ Shop by Categories */}
+
       <h1 className="text-xl sm:text-2xl font-serif mb-6 text-gray-800 mt-10">
         Shop by Categories
       </h1>
