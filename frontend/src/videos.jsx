@@ -120,7 +120,7 @@ const VideoCarousel = () => {
               <img
                 src={img}
                 alt={`icon-${index}`}
-                className="w-8 h-8 sm:w-10 sm:h-10 object-contain"
+                className="w-12 h-12 sm:w-15 sm:h-15 object-contain"
               />
             </button>
             <span className="text-xs sm:text-sm font-medium text-gray-700 text-center ">
