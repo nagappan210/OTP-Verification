@@ -1,3 +1,5 @@
+import Video from "./videos";
+
 const images = [
   '/image/image-20.png',
   '/image/image-21.png',
@@ -15,8 +17,11 @@ const texts = [
 ];
 
 const Body1 = () => {
+  
+
   return (
-    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6 p-4 shadow-xl bg-white rounded-2xl mx-4 sm:mx-10 lg:mx-20 my-5 mb-10">
+    <div>
+      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6 p-4 shadow-xl bg-white rounded-2xl mx-4 sm:mx-10 lg:mx-20 my-5 mb-10">
       {images.map((img, index) => (
         <div key={index} className="flex flex-col items-center space-y-2">
           <button className="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-blue-100 flex items-center justify-center hover:bg-blue-200 cursor-pointer shadow-md transition">
@@ -31,7 +36,11 @@ const Body1 = () => {
           </span>
         </div>
       ))}
+      
     </div>
+    <Video/>
+    </div>
+    
   );
 };
 
