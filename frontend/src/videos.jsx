@@ -10,6 +10,30 @@ const videos = [
   { id: "fECW-ggP0Lo", title: "Dr. Ibrahim Overview" },
 ];
 
+const images = [
+  "/image/p.png",
+  "/image/p1.png",
+  "/image/p2.png",
+  "/image/p3.png",
+  "/image/p4.png",
+  "/image/p5.png",
+  "/image/p6.png",
+  "/image/p7.png",
+  "/image/p8.png",
+];
+
+const texts = [
+  "Tablet",
+  "Injection",
+  "Drop",
+  "Ointment",
+  "Syrup",
+  "Cream",
+  "Gel",
+  "Sachet",
+  "Face Wash",
+];
+
 const VideoCarousel = () => {
   const [selectedVideo, setSelectedVideo] = useState(null);
 
@@ -23,7 +47,8 @@ const VideoCarousel = () => {
 
   return (
     <div className="px-4 sm:px-10 lg:px-20 my-10 mt-20">
-      <h2 className="text-xl sm:text-2xl font-serif mb-8 text-gray-800 ">
+      {/* 🎥 Video Marquee Section */}
+      <h2 className="text-xl sm:text-2xl font-serif mb-8 text-gray-800">
         Generic Medicine Explained
       </h2>
 
@@ -47,10 +72,11 @@ const VideoCarousel = () => {
         ))}
       </Marquee>
 
+      {/* 📺 Video Popup Modal */}
       <AnimatePresence>
         {selectedVideo && (
           <motion.div
-            className="fixed inset-0 bg-opacity-70 z-50 flex items-center justify-center px-4"
+            className="fixed inset-0 bg-black bg-opacity-70 z-50 flex items-center justify-center px-4"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -82,6 +108,27 @@ const VideoCarousel = () => {
           </motion.div>
         )}
       </AnimatePresence>
+
+      {/* 🛍️ Shop by Categories */}
+      <h1 className="text-xl sm:text-2xl font-serif mb-6 text-gray-800 mt-10">
+        Shop by Categories
+      </h1>
+      <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-9 gap-10 bg-white shadow-xl rounded-2xl p-4  sm:p-6 mb-20">
+        {images.map((img, index) => (
+          <div key={index} className="flex flex-col items-center space-y-2 ">
+            <button className="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-blue-50 flex items-center justify-center hover:bg-blue-100 cursor-pointer shadow-md transition">
+              <img
+                src={img}
+                alt={`icon-${index}`}
+                className="w-8 h-8 sm:w-10 sm:h-10 object-contain"
+              />
+            </button>
+            <span className="text-xs sm:text-sm font-medium text-gray-700 text-center ">
+              {texts[index]}
+            </span>
+          </div>
+        ))}
+      </div>
     </div>
   );
 };
